@@ -107,7 +107,8 @@ def file_orchestrator(file_list):
                 successfully_processed.append(file_path)
 
     # Delete all successfully processed image files (and original file)
-    delete_files_by_basename(file_list.extend(successfully_processed))
+    # delete_files_by_basename(file_list.extend(successfully_processed))
+    delete_files_by_basename(file_list)
 
     print(f"Processing complete. Output saved to: {output_file_path}")
 
