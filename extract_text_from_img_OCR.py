@@ -1,17 +1,11 @@
-import pytesseract
-from pdf2image import convert_from_path
-from PIL import Image
 import os
 from datetime import datetime
-
-# Set the path for Tesseract if it's not in your system's PATH
-# For example, on Windows you might need something like:
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+from pdf2image import convert_from_path
+from PIL import Image
+import pytesseract
 
 # TODO:
-# delete files once picked out of IN
-# format extracted text into valid paragraphs once extracted out. batch it based off token limit to gemini API, etc.
-#
+# cleanup code
 
 
 def fetch_files():
@@ -75,7 +69,8 @@ def file_orchestrator(file_list):
     # successfully_processed = []
 
     # Get the current date time for filename
-    current_date_time = datetime.now().strftime("%Y.%m.%d %H.%M")
+    # current_date_time = datetime.now().strftime("%Y.%m.%d %H.%M")
+    current_date_time = datetime.now().strftime("%Y.%m.%d %I:%M%p").lower()
 
     # Construct the output file path with the current date appended
     output_file_path = os.path.join(
@@ -105,6 +100,7 @@ def file_orchestrator(file_list):
 
                 # Write the image text to the file (appending)
                 if image_text:
+                    # TODO: change this to the page number instead, or remove from getting written to file
                     output_file.write(f"Processed file: {file_path}\n")
                     output_file.write(image_text + "\n\n")
 
